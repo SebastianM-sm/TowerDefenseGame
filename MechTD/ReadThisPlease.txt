@@ -1,0 +1,50 @@
+Follow these steps to get your Unity set up exactly like mine.
+
+Camera:
+Step 1: Click "Main Camera" in the Hierarchy menu, go to the inspector and look for "Transform" component, set "Z" position to -10.
+
+Step 2: Keep "Main Camera" selected and look for the "Camera" component, click the "Projection" drop down menu and set size to "10" (this makes the area the camera puts on screen bigger.)
+
+Turret:
+Step 1: Drag and drop "Turret" from the sprites folder to anywhere on the scene.
+
+Step 2: Click "Turret" in the hierarchy and look for "Transform" component. Set its position to a specific value (I recommend 0,0,0 so it's in the middle)
+
+Step 3: (This step only matters if the Turret does not already have the "Turret (Script)" component, so make sure to check.) Go to scripts, find "Turret" and drag and drop that script onto the inspector (Make sure Turret is still selected in the hierarchy)
+
+Step 4: Look for the "Turret (Script)" component. For "Range" give it any number greater than 0 (9 has worked well in my testing). Same thing for "Fire Rate" (I found 2 works pretty well). For "Projectile Prefab" you need to look in the prefabs folder and find "Projectile" (Make sure there's a blue cube next to it's name). Once you've located the "Projectile" prefab you need to drag and drop it into the box next to where it says "Projectile Prefab" in the inspector (for this part make sure you have the Turret selected and not the projectile prefab). For "Point A" you need to locate Turret in the hierarchy and drag and drop it into the box next to "Point A". Finally, set Rotation Speed to 90.
+
+Enemy Handler:
+Step 1: Create an empty GameObject and name it "Enemy Handler" (this is case sensitive so copy and paste).
+
+Step 2: Look for the "Transform" component and set position to (0,0,0)
+
+Step 3: Find the "EnemyHandler" in the scripts folder and drag and drop it onto the inspector (make sure Enemy Handler is still selected in the hierarchy)
+
+Step 4: Look in the inspector and find "Enemy" in the "Enemy Handler (script)" dropdown. Find the "Enemy" prefab in the Prefabs folder, make sure there is a blue cube next to its name. Then drag and drop the "Enemy" prefab into the box next to "Enemy" in the inspector (make sure Enemy Handler is still selected in the hierarchy).
+
+Step 5: Look for where it says "Turret" in the inspector. Drag and drop the Turret from the hierarchy into the box next to "Turret"
+
+Enemy:
+Step 1: Locate the "Enemy" prefab in the Prefabs folder. Click on it.
+
+Step 2: Look for the "Transform" component in the inspector and set the Scale (not position) to (0.5, 0.5, 0.5)
+
+Step 3: Ensure there is both the "Enemy (Script)" and a Box Collider 2D in the inspector
+
+Step 4: In the "Enemy (Script)" set Move Speed to 1, Max Health to 1, Attack Distance to 1.
+
+Step 5: This one needs a little explanation so I made it, its own step. Set Direction Change Time to 2. I orginally made this variable to make the enemies move randomly so I could test that the turret targeting still worked. However, I later changed this so the enemies moved toward the Turret. When I made that change I forgot to get rid of the function that made the Enemies mvoe randomly, it isn't used by the game anymore but it still exsists in the code. When I realized it was still there I tried to remove, and the game started running very slowly, and the targeting code stopped functioning properly. Until I figure out the problem I'm just going to leave it in since it's not actively doing anything.
+
+Projectile:
+Step 1: Select the "Projectile" prefab in the Prefabs folder.
+
+Step 2: Set the scale to (0.25, 0.25, 0.25)
+
+Step 3: Ensure it has the "Projectile (Script)", "Rigidbody2D", and "Circle Collider 2D" components.
+
+Step 4: Look for "Projectile (Script)" and set Damage to 1, and Speed to 20.
+
+Step 5: Look for "Rigidbody2D" and the first thing should say Body Type, make sure it says "Kinematic"
+
+Step 6: Look for "Circle Collider 2D" and find the box that say "Is Trigger" make sure it's checked.
