@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using System.Collections;
 
 
+
+
+/*This is Michael. I put all my contact information in the Trello. 
+I will be checking them regualarly, so if you need anything, anything at all just message.*/
+
+
+
+
 public class EnemyHandler : MonoBehaviour
 {
     public static EnemyHandler Instance;
