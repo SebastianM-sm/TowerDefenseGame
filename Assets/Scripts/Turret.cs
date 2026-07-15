@@ -1,8 +1,6 @@
 //Copyright DigiPen Inst. of Technology. All Rights Reserved.
 
-using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Turret : MonoBehaviour
 {

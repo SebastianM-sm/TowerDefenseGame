@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
+
 
 public class EnemyHandler : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class EnemyHandler : MonoBehaviour
 
     public Transform turret;
 
+ 
+
 
     private void Awake()
     {
@@ -19,16 +23,36 @@ public class EnemyHandler : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < 30; i++)
+        Vector3 spawnVector = new Vector3(Random.Range(-17f, -10f), Random.Range(-9.2f, 9.2f));
+        /*for (int i = 0; i < 30; i++)
         {
             Vector3 spawnPosition = new Vector3(Random.Range(-17f, -10f), Random.Range(-9.2f, 9.2f), 0);
             GameObject newEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
             Enemy enemyScript = newEnemy.GetComponent<Enemy>();
             enemyScript.turret = turret;
             enemies.Add(enemyScript);
-        }
+        }*/
+        SpawnEnemy(spawnVector, 30, 2);
         Debug.Log(enemies.Count);
 
+    }
+
+    void SpawnEnemy(Vector3 spawn, int numberOfEnemies, float timeBetweenSpawn)
+    {
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            GameObject newEnemy = Instantiate(enemy, spawn, Quaternion.identity);
+            Enemy enemyScript = newEnemy.GetComponent<Enemy>();
+            enemyScript.turret = turret;
+            enemies.Add(enemyScript);
+            spawn = new Vector3(Random.Range(-17f, -10f), Random.Range(-9.2f, 9.2f));
+            StartCoroutine(SpawnTimer(timeBetweenSpawn));
+        }
+    }
+
+    IEnumerator SpawnTimer(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
     }
 
     void Update()
