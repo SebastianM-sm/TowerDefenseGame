@@ -441,8 +441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c27901c026814f41a4cdb71264bb463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 9
-  fireRate: 2
+  range: 6
+  fireRate: 1
   projectilePrefab: {fileID: 4118064340704404348, guid: adb409794aecf8b48bd8407c95cbf353, type: 3}
   pointA: {fileID: 1508471097}
   rotationSpeed: 90

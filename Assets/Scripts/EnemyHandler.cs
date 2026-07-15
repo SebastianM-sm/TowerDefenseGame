@@ -23,7 +23,7 @@ public class EnemyHandler : MonoBehaviour
 
     void Start()
     {
-        Vector3 spawnVector = new Vector3(Random.Range(-17f, -10f), Random.Range(-9.2f, 9.2f));
+        Vector3 spawnVector = new Vector3(Random.Range(-10.3f, -9.2f), Random.Range(-5.3f, 5.3f));
         /*for (int i = 0; i < 30; i++)
         {
             Vector3 spawnPosition = new Vector3(Random.Range(-17f, -10f), Random.Range(-9.2f, 9.2f), 0);
@@ -32,12 +32,12 @@ public class EnemyHandler : MonoBehaviour
             enemyScript.turret = turret;
             enemies.Add(enemyScript);
         }*/
-        SpawnEnemy(spawnVector, 30, 2);
+        StartCoroutine(SpawnEnemy(spawnVector, 30, 1));
         Debug.Log(enemies.Count);
 
     }
 
-    void SpawnEnemy(Vector3 spawn, int numberOfEnemies, float timeBetweenSpawn)
+    IEnumerator SpawnEnemy(Vector3 spawn, int numberOfEnemies, int timeBetweenSpawn)
     {
         for (int i = 0; i < numberOfEnemies; i++)
         {
@@ -45,14 +45,10 @@ public class EnemyHandler : MonoBehaviour
             Enemy enemyScript = newEnemy.GetComponent<Enemy>();
             enemyScript.turret = turret;
             enemies.Add(enemyScript);
-            spawn = new Vector3(Random.Range(-17f, -10f), Random.Range(-9.2f, 9.2f));
-            StartCoroutine(SpawnTimer(timeBetweenSpawn));
+            spawn = new Vector3(Random.Range(-10.3f, -9.2f), Random.Range(-5.3f, 5.3f));
+            Debug.Log(timeBetweenSpawn);
+            yield return new WaitForSeconds(timeBetweenSpawn);
         }
-    }
-
-    IEnumerator SpawnTimer(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
     }
 
     void Update()
