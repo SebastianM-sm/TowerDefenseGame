@@ -4,30 +4,18 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    //Used to determine turret range
-    public float range = Mathf.Infinity;
-    //Used to determine turret fire rate
-    public float fireRate = 2f;
-    private float fireTimer;
-
-    //Used to spawn in copies of the projectile(s)
-    public GameObject projectilePrefab;
-
-    //Turret location, used for calculating direction
-    public Transform pointA;
-    //The enemy the turret is currently targeting
-    private Enemy currentTarget;
-    //Used to determine the speed of rotation
-    public float rotationSpeed = 90f;
+    
+    float rotationSpeed = 180f;
 
     float maxTurretHealth = 100f;
     float currentTurretHealth;
 
     public static Turret Instance;
 
+    public GameObject projectilePrefab;
+    public Transform pointA;
 
-    //Used on the enemy finder to reduce the amount of times per second it runs
-    private float searchTimer;
+    float newAngle;
 
     private void Awake()
     {
@@ -57,6 +45,56 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
+        float currentAngle = transform.eulerAngles.z;
+        float maxStep = Mathf.Clamp(rotationSpeed * Time.deltaTime, 0f, 180f);
+        bool rotateLeftA = Input.GetKey(KeyCode.A);
+        bool rotateLeftLeft = Input.GetKey(KeyCode.LeftArrow);
+        bool rotateRightD = Input.GetKey(KeyCode.D);
+        bool rotateRightRight = Input.GetKey(KeyCode.RightArrow);
+
+        if (rotateLeftA == true || rotateLeftLeft == true)
+        {
+            newAngle = currentAngle + maxStep;
+        }
+
+        if (rotateRightD == true || rotateRightRight == true)
+        {
+            newAngle = currentAngle - maxStep;
+        }
+
+        transform.eulerAngles = new Vector3(0, 0, newAngle);
+    }
+
+    private void OnMouseDown()
+    {
+        Debug.Log("Should fire");
+        Fire();
+    }
+
+    void Fire()
+    {
+        GameObject projectile = Instantiate(projectilePrefab, pointA.position, transform.rotation);
+        projectile.GetComponent<Projectile>().SetDirection(pointA.up);
+    }
+
+    /*
+     //Used to determine turret range
+    public float range = Mathf.Infinity;
+    //Used to determine turret fire rate
+    public float fireRate = 2f;
+    private float fireTimer;
+
+    //Used to spawn in copies of the projectile(s)
+
+
+    //Turret location, used for calculating direction
+
+    //The enemy the turret is currently targeting
+    private Enemy currentTarget;
+    //Used to determine the speed of rotation
+
+    //Used on the enemy finder to reduce the amount of times per second it runs
+    private float searchTimer;
 
         fireTimer -= Time.deltaTime;
         if (fireTimer <=0)
@@ -66,20 +104,6 @@ public class Turret : MonoBehaviour
                 Fire();
             }
             fireTimer = 1f / fireRate;
-        }
-
-        void Fire()
-        {
-            GameObject projectile = Instantiate(projectilePrefab, pointA.position, transform.rotation);
-            projectile.GetComponent<Projectile>()
-                .SetTarget(currentTarget);
-
-            float distance = Vector2.Distance(pointA.position, currentTarget.transform.position);
-
-            if (distance > range)
-            {
-                currentTarget = null;
-            }
         }
 
         //As mentioned before this is used to help the game run better
@@ -115,18 +139,15 @@ public class Turret : MonoBehaviour
         //Normalizes the vectors so they can be used for direction. (X/magniude, Y/magnitude)
         Vector2 direction = vectorToTarget.normalized;
 
-        /*Calculates the angle the turret needs to face to point towards the target (in radians), 
-        it then converts from radians to degrees (on the Z-axis)*/
+        //Calculates the angle the turret needs to face to point towards the target (in radians), it then converts from radians to degrees (on the Z-axis)
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg-90;
         //Puts the angle the turret is currently facing into a variable.
         float currentAngle = transform.eulerAngles.z;
 
-        /*Mathf.Lerp(A,B,T). Mathf.Lerp sets A as a starting point and moves by an increment the size of T, until it reaches B. 
-        Mathf.LerpAngle does the same but makes sure it works correctly for when it wraps around 360 degrees*/
+        //Mathf.Lerp(A,B,T). Mathf.Lerp sets A as a starting point and moves by an increment the size of T, until it reaches B. Mathf.LerpAngle does the same but makes sure it works correctly for when it wraps around 360 degrees
         float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, 0.1f);
         //Sets the roation of the turret to the value of newAngle. It only affects the Z-axis, this is because in 2d the Z-axis is the only one we can see changing.
         transform.eulerAngles = new Vector3(0, 0, newAngle);
 
-
-    }
+*/
 }
