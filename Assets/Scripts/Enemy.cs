@@ -6,19 +6,15 @@ public class Enemy : MonoBehaviour
 
     float moveSpeed = 1f;
 
-    float directionChangeTime = 2f;
-
-    Vector2 moveDirection;
-
-    float directionTimer;
-
-    int maxEnemyHelath = 1;
-    int currentEnenmyHealth;
+    public float maxEnemyHelath;
+    float currentEnemyHealth;
 
     public Transform turret;
 
-    float attackDistanceEnemy = 1f;
-    float attackDamageEnemy = 1f;
+    float attackDistanceEnemy = 1;
+    public float attackDamageEnemy;
+
+
 
     private void OnDestroy()
     {
@@ -31,8 +27,9 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentEnenmyHealth = maxEnemyHelath;
-        PickNewDirection();
+        maxEnemyHelath = EnemyHandler.Instance.enemyMaxHealth;
+        currentEnemyHealth = maxEnemyHelath;
+        attackDamageEnemy = EnemyHandler.Instance.enemyDamage;
     }
 
     // Update is called once per frame
@@ -52,18 +49,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
-
-    void PickNewDirection()
-    {
-        moveDirection = Random.insideUnitCircle.normalized;
-        directionTimer = Random.Range(1f, directionChangeTime);
-    }
-
     public void TakeDamageEnemy(int damage)
     {
-        currentEnenmyHealth -= damage;
+        currentEnemyHealth -= damage;
 
-        if (currentEnenmyHealth <= 0)
+        if (currentEnemyHealth <= 0)
         {
             Die();
         }

@@ -21,7 +21,11 @@ public class EnemyHandler : MonoBehaviour
 
     public Transform turret;
 
- 
+    public float enemyDamage = 1;
+    float baseEnemyDamage = 1;
+    public float enemyMaxHealth = 1;
+    float baseEnemyMaxHealth = 1;
+    [SerializeField] int currentWave = 0;
 
 
     private void Awake()
@@ -31,31 +35,42 @@ public class EnemyHandler : MonoBehaviour
 
     void Start()
     {
-        Vector3 spawnVector = new Vector3(Random.Range(-10.3f, -9.2f), Random.Range(-5.3f, 5.3f));
-        /*for (int i = 0; i < 30; i++)
-        {
-            Vector3 spawnPosition = new Vector3(Random.Range(-17f, -10f), Random.Range(-9.2f, 9.2f), 0);
-            GameObject newEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
-            Enemy enemyScript = newEnemy.GetComponent<Enemy>();
-            enemyScript.turret = turret;
-            enemies.Add(enemyScript);
-        }*/
-        StartCoroutine(SpawnEnemy(spawnVector, 30, 1));
-        Debug.Log(enemies.Count);
+
+        StartCoroutine(SpawnEnemy(RandomSpawnVector(), 30, 1));
 
     }
+
+    private Vector3 RandomSpawnVector()
+        {
+            Vector3 spawnVector = new Vector3(Random.Range(-10.3f, -9.2f), Random.Range(-5.3f, 5.3f));
+            return spawnVector;
+        }
 
     IEnumerator SpawnEnemy(Vector3 spawn, int numberOfEnemies, int timeBetweenSpawn)
     {
         for (int i = 0; i < numberOfEnemies; i++)
         {
+            CalcEnemyHealthDamage();
             GameObject newEnemy = Instantiate(enemy, spawn, Quaternion.identity);
             Enemy enemyScript = newEnemy.GetComponent<Enemy>();
             enemyScript.turret = turret;
             enemies.Add(enemyScript);
-            spawn = new Vector3(Random.Range(-10.3f, -9.2f), Random.Range(-5.3f, 5.3f));
-            Debug.Log(timeBetweenSpawn);
+            spawn = RandomSpawnVector();
             yield return new WaitForSeconds(timeBetweenSpawn);
+        }
+    }
+
+    private void CalcEnemyHealthDamage()
+    {
+        if (currentWave == 1)
+        {
+            enemyDamage = 1;
+            enemyMaxHealth = 1;
+        }
+        else
+        {
+            enemyDamage = baseEnemyDamage * (currentWave * 1.05f);
+            enemyMaxHealth = baseEnemyMaxHealth * (currentWave * 1.05f);
         }
     }
 
