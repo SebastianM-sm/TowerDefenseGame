@@ -17,7 +17,7 @@ public class EnemyHandler : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    void StartWave()
     {
         for (int i = 0; i < 30; i++)
         {
@@ -31,9 +31,13 @@ public class EnemyHandler : MonoBehaviour
 
     }
 
+    
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space) == true)
+        {
+            StartWave();
+        }
     }
 
     //Returns the enemy closest to the supplied position
@@ -61,5 +65,6 @@ public class EnemyHandler : MonoBehaviour
 
         //Returns the closest enemy, or null if there aren't any
         return ClosestEnemy;
+
     }
 }
