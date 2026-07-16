@@ -1,9 +1,10 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class Enemy : MonoBehaviour
 {
-
+    
     float moveSpeed = 1f;
 
     float directionChangeTime = 2f;
@@ -12,7 +13,7 @@ public class Enemy : MonoBehaviour
 
     float directionTimer;
 
-    int maxEnemyHelath = 1;
+    int maxEnemyHealth = 1;
     int currentEnenmyHealth;
 
     public Transform turret;
@@ -31,7 +32,7 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentEnenmyHealth = maxEnemyHelath;
+        currentEnenmyHealth = maxEnemyHealth;
         PickNewDirection();
     }
 
@@ -69,6 +70,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //added by op for prototype, will be revised
     void Die()
     {
         Destroy(gameObject);

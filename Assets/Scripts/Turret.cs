@@ -1,4 +1,4 @@
-//Copyright DigiPen Inst. of Technology. All Rights Reserved.
+//Copyright DigiPen Inst. of Technology. All Rights Reserved. Wow, official.
 
 using System;
 using UnityEngine;
@@ -36,6 +36,7 @@ public class Turret : MonoBehaviour
         Instance = this;
     }
 
+ 
     private void Start()
     {
         currentTurretHealth = maxTurretHealth;
@@ -130,5 +131,10 @@ public class Turret : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, newAngle);
 
 
+    }
+    //added by op for prototype, may edit later
+    public void FireRateUp()
+    {
+        fireRate++;
     }
 }

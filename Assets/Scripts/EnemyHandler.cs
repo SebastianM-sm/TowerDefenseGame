@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class EnemyHandler : MonoBehaviour
 {
+    [SerializeField] TextHandler TextUse;
     public static EnemyHandler Instance;
 
     public GameObject enemy;
@@ -28,15 +30,21 @@ public class EnemyHandler : MonoBehaviour
             enemies.Add(enemyScript);
         }
         Debug.Log(enemies.Count);
-
+        //added by op for prototype, will change later
+        
     }
-
+    
     
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) == true)
         {
             StartWave();
+            
+        }
+        if (enemies.Count == 0)
+        {
+            TextUse.Upgrade();
         }
     }
 
@@ -65,6 +73,7 @@ public class EnemyHandler : MonoBehaviour
 
         //Returns the closest enemy, or null if there aren't any
         return ClosestEnemy;
-
+        
     }
+
 }
