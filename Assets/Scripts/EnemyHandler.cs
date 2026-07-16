@@ -36,8 +36,8 @@ public class EnemyHandler : MonoBehaviour
     void Start()
     {
 
-        StartCoroutine(SpawnEnemy(RandomSpawnVector(), 30, 1));
-
+        //StartCoroutine(SpawnEnemy(RandomSpawnVector(), 30, 1));
+        currentWave = 0;
     }
 
     private Vector3 RandomSpawnVector()
