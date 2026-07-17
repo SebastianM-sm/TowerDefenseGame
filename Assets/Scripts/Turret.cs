@@ -1,5 +1,7 @@
 //Copyright DigiPen Inst. of Technology. All Rights Reserved.
 
+
+
 using UnityEngine;
 
 public class Turret : MonoBehaviour
@@ -14,6 +16,10 @@ public class Turret : MonoBehaviour
     public Transform pointA;
 
     float newAngle;
+
+    public AudioSource Ded;
+    public AudioSource Fire1;
+    public AudioSource Fire2;
 
     private void Awake()
     {
@@ -38,6 +44,7 @@ public class Turret : MonoBehaviour
     public void GameOver()
     {
         Destroy(gameObject);
+        Ded.Play();
         GameOverCanvas.enabled = true;
     }
 
@@ -57,6 +64,7 @@ public class Turret : MonoBehaviour
 
     void Fire()
     {
+        Fire1.Play();
         Vector3 spawnPosition = pointA.position + pointA.up * 2.2f;
         GameObject projectile = Instantiate(projectilePrefab, spawnPosition, transform.rotation);
         projectile.GetComponent<Projectile>().SetDirection(pointA.up);

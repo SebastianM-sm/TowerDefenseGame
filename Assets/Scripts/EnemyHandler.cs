@@ -32,6 +32,10 @@ public class EnemyHandler : MonoBehaviour
 
     public TextMeshProUGUI uiText;
 
+    public AudioSource enemyDamageSound;
+
+    private bool GameOverCanvasEnabled;
+
     private void Awake()
     {
         Instance = this;
@@ -39,7 +43,7 @@ public class EnemyHandler : MonoBehaviour
 
     void Start()
     {
-        GameOverCanvas.enabled = false;
+        GameOverCanvasEnabled = false;
         //StartCoroutine(SpawnEnemy(RandomSpawnVector(), 30, 1));
         currentWave = 0;
     }
