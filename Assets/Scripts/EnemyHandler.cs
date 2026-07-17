@@ -99,7 +99,7 @@ public class EnemyHandler : MonoBehaviour
     }
 
     //Returns the enemy closest to the supplied position
-    public Enemy GetClosestEnemy(Vector2 position)
+    /*public Enemy GetClosestEnemy(Vector2 position)
     {
         //Used to keep track of the closest enemy found while searching
         float closestDistance = Mathf.Infinity;
@@ -123,5 +123,5 @@ public class EnemyHandler : MonoBehaviour
 
         //Returns the closest enemy, or null if there aren't any
         return ClosestEnemy;
-    }
+    }*/
 }
