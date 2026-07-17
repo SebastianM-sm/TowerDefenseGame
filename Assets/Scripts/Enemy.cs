@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     float attackDistanceEnemy = 1;
     public float attackDamageEnemy;
 
-
+    public AudioSource enemyDamaged;
 
 
 
@@ -56,6 +56,8 @@ public class Enemy : MonoBehaviour
     public void TakeDamageEnemy(int damage)
     {
         currentEnemyHealth -= damage;
+
+        enemyDamaged.Play();
 
         if (currentEnemyHealth <= 0)
         {

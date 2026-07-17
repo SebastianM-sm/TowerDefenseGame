@@ -101,12 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae3c6bad37c97c46bddec514d833eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  directionChangeTime: 2
   maxEnemyHelath: 1
   turret: {fileID: 0}
-  attackDistanceEnemy: 0.1
   attackDamageEnemy: 1
+  enemyDamage: {fileID: 0}
 --- !u!61 &-6464875469868164778
 BoxCollider2D:
   m_ObjectHideFlags: 0
