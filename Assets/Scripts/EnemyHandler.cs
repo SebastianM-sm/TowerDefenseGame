@@ -40,11 +40,27 @@ public class EnemyHandler : MonoBehaviour
         currentWave = 0;
     }
 
+    // private Vector3 RandomSpawnVector()
+    //   {
+    //      Vector3 spawnVector = new Vector3(Random.Range(-10.3f, -9.2f), Random.Range(-5.3f, 5.3f));
+    //       return spawnVector;
+    //  }
+
+    // edit by op, original code is commented out above.
+
     private Vector3 RandomSpawnVector()
-        {
-            Vector3 spawnVector = new Vector3(Random.Range(-10.3f, -9.2f), Random.Range(-5.3f, 5.3f));
-            return spawnVector;
-        }
+    {
+        Vector3 spawnVector1 = new Vector3(-6.4f,0f);
+        Vector3 spawnVector2 = new Vector3(3f,0f);
+        Vector3 spawnVector3 = new Vector3(-1.66f,4.6f);
+        Vector3 spawnVector4 = new Vector3(-1.66f,-4.6f);
+
+        var spawnList = new List<Vector3> { spawnVector1, spawnVector2, spawnVector3, spawnVector4 };
+
+        Vector3 spawnVector = spawnList[Random.Range(0,spawnList.Count)];
+
+        return spawnVector;
+    }
 
     IEnumerator SpawnEnemy(Vector3 spawn, int numberOfEnemies, int timeBetweenSpawn)
     {
@@ -73,10 +89,13 @@ public class EnemyHandler : MonoBehaviour
             enemyMaxHealth = baseEnemyMaxHealth * (currentWave * 1.05f);
         }
     }
-
+    // Wave start - added by op, may be changed later.
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Return) == true)
+        {
+            StartCoroutine(SpawnEnemy(RandomSpawnVector(), 30, 1));
+        }
     }
 
     //Returns the enemy closest to the supplied position
