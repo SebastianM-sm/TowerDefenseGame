@@ -1646,7 +1646,7 @@ MonoBehaviour:
   enemyMaxHealth: 1
   currentWave: 1
   score: 0
-  uiText: {fileID: 0}
+  uiText: {fileID: 1130632237}
 --- !u!4 &2005876298
 Transform:
   m_ObjectHideFlags: 0
