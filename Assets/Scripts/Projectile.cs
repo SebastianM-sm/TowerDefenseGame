@@ -4,11 +4,11 @@ public class Projectile : MonoBehaviour
 {
 
     public int damage = 1;
-    public float speed = 12f;
+    float speed = 40f;
 
     private Vector2 moveDirection; 
 
-    public float lifeTime = 5f;
+    public float lifeTime = 3f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

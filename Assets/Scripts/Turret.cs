@@ -63,17 +63,17 @@ public class Turret : MonoBehaviour
         }
 
         transform.eulerAngles = new Vector3(0, 0, newAngle);
-    }
 
-    private void OnMouseDown()
-    {
-        Debug.Log("Should fire");
-        Fire();
+        if (Input.GetMouseButtonDown(0))
+        {
+            Fire();
+        }
     }
 
     void Fire()
     {
-        GameObject projectile = Instantiate(projectilePrefab, pointA.position, transform.rotation);
+        Vector3 spawnPosition = pointA.position + pointA.up * 2.2f;
+        GameObject projectile = Instantiate(projectilePrefab, spawnPosition, transform.rotation);
         projectile.GetComponent<Projectile>().SetDirection(pointA.up);
     }
 
