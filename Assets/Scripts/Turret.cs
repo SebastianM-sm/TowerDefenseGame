@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    
-    float rotationSpeed = 180f;
-
     float maxTurretHealth = 100f;
     float currentTurretHealth;
 
