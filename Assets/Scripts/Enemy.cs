@@ -1,5 +1,7 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class Enemy : MonoBehaviour
 {
@@ -14,7 +16,9 @@ public class Enemy : MonoBehaviour
     float attackDistanceEnemy = 1;
     public float attackDamageEnemy;
 
-    public int score = 0;
+
+
+
 
     private void OnDestroy()
     {
@@ -61,7 +65,9 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        score++;
+        EnemyHandler.Instance.updateScore();
         Destroy(gameObject);
     }
+
+
 }
