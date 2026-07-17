@@ -13,7 +13,7 @@ I will be checking them regualarly, so if you need anything, anything at all jus
 
 public class EnemyHandler : MonoBehaviour
 {
-
+    [SerializeField] private Canvas GameOverCanvas;
     public static EnemyHandler Instance;
 
     public GameObject enemy;
@@ -39,7 +39,7 @@ public class EnemyHandler : MonoBehaviour
 
     void Start()
     {
-        
+        GameOverCanvas.enabled = false;
         //StartCoroutine(SpawnEnemy(RandomSpawnVector(), 30, 1));
         currentWave = 0;
     }
@@ -98,7 +98,7 @@ public class EnemyHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return) == true)
         {
-        
+            GameOverCanvas.enabled = false;
             StartCoroutine(SpawnEnemy(RandomSpawnVector(), 30, 1));
         }
     }
