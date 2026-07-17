@@ -45,24 +45,11 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
-        float currentAngle = transform.eulerAngles.z;
-        float maxStep = Mathf.Clamp(rotationSpeed * Time.deltaTime, 0f, 180f);
-        bool rotateLeftA = Input.GetKey(KeyCode.A);
-        bool rotateLeftLeft = Input.GetKey(KeyCode.LeftArrow);
-        bool rotateRightD = Input.GetKey(KeyCode.D);
-        bool rotateRightRight = Input.GetKey(KeyCode.RightArrow);
-
-        if (rotateLeftA == true || rotateLeftLeft == true)
-        {
-            newAngle = currentAngle + maxStep;
-        }
-
-        if (rotateRightD == true || rotateRightRight == true)
-        {
-            newAngle = currentAngle - maxStep;
-        }
-
-        transform.eulerAngles = new Vector3(0, 0, newAngle);
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
+        Vector2 direction = mousePosition - transform.position;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        transform.rotation = Quaternion.Euler(0f, 0f, targetAngle);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -147,6 +134,27 @@ public class Turret : MonoBehaviour
         //Mathf.Lerp(A,B,T). Mathf.Lerp sets A as a starting point and moves by an increment the size of T, until it reaches B. Mathf.LerpAngle does the same but makes sure it works correctly for when it wraps around 360 degrees
         float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, 0.1f);
         //Sets the roation of the turret to the value of newAngle. It only affects the Z-axis, this is because in 2d the Z-axis is the only one we can see changing.
+        transform.eulerAngles = new Vector3(0, 0, newAngle);
+
+
+
+            /*float currentAngle = transform.eulerAngles.z;
+        float maxStep = Mathf.Clamp(rotationSpeed * Time.deltaTime, 0f, 180f);
+        bool rotateLeftA = Input.GetKey(KeyCode.A);
+        bool rotateLeftLeft = Input.GetKey(KeyCode.LeftArrow);
+        bool rotateRightD = Input.GetKey(KeyCode.D);
+        bool rotateRightRight = Input.GetKey(KeyCode.RightArrow);
+
+        if (rotateLeftA == true || rotateLeftLeft == true)
+        {
+            newAngle = currentAngle + maxStep;
+        }
+
+        if (rotateRightD == true || rotateRightRight == true)
+        {
+            newAngle = currentAngle - maxStep;
+        }
+
         transform.eulerAngles = new Vector3(0, 0, newAngle);
 
 */
