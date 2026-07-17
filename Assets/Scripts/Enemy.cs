@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 
     float moveSpeed = 1f;
 
-    public float maxEnemyHelath;
+    public float maxEnemyHealth;
     float currentEnemyHealth;
 
     public Transform turret;
@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     float attackDistanceEnemy = 1;
     public float attackDamageEnemy;
 
-    public AudioSource enemyDamaged;
+    public AudioSource enemyDamage;
 
 
 
@@ -31,8 +31,8 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        maxEnemyHelath = EnemyHandler.Instance.enemyMaxHealth;
-        currentEnemyHealth = maxEnemyHelath;
+        maxEnemyHealth = EnemyHandler.Instance.enemyMaxHealth;
+        currentEnemyHealth = maxEnemyHealth;
         attackDamageEnemy = EnemyHandler.Instance.enemyDamage;
     }
 
@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
     {
         currentEnemyHealth -= damage;
 
-        enemyDamaged.Play();
+        enemyDamage.Play();
 
         if (currentEnemyHealth <= 0)
         {
