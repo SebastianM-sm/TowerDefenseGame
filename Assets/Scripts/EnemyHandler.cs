@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-
+using TMPro;
 
 
 
@@ -27,6 +27,9 @@ public class EnemyHandler : MonoBehaviour
     float baseEnemyMaxHealth = 1;
     [SerializeField] int currentWave = 0;
 
+    public int score = 0;
+
+    public TextMeshProUGUI uiText;
 
     private void Awake()
     {
@@ -96,6 +99,12 @@ public class EnemyHandler : MonoBehaviour
         {
             StartCoroutine(SpawnEnemy(RandomSpawnVector(), 30, 1));
         }
+    }
+
+    public void updateScore()
+    {
+        score++;
+        uiText.text = $"Score: {score}";
     }
 
     //Returns the enemy closest to the supplied position
