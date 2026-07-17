@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    [SerializeField] private Canvas GameOverCanvas;
+    
     float maxTurretHealth = 100f;
     float currentTurretHealth;
 
@@ -45,7 +45,7 @@ public class Turret : MonoBehaviour
     {
         Destroy(gameObject);
         Ded.Play();
-        GameOverCanvas.enabled = true;
+        
     }
 
     void Update()
