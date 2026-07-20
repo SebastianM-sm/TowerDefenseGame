@@ -21,6 +21,8 @@ public class Turret : MonoBehaviour
     public AudioSource Fire1;
     public AudioSource Fire2;
 
+    public GameObject gameOverUI;
+
     private void Awake()
     {
         Instance = this;
@@ -33,22 +35,10 @@ public class Turret : MonoBehaviour
 
     public void TakeDamageTurret(float damage)
     {
-        currentTurretHealth = Mathf.Clamp(currentTurretHealth - damage, 0, maxTurretHealth);
-
-        Debug.Log($"{currentTurretHealth}/{maxTurretHealth}");
-
-        if (currentTurretHealth == 0)
-            GameOver();
+        Ded.Play(); gameOverUI.SetActive(true); Destroy(gameObject);
     }
 
-    public void GameOver()
-    {
-        Destroy(gameObject);
-        Ded.Play();
-        
-    }
-
-    void Update()
+        void Update()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
